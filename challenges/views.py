@@ -27,11 +27,9 @@ def monthly_challenge_by_number(request, month):
     return HttpResponse(month)
 
 def monthly_challenge(request, month):
-    challenge_text = None
-    if (month == "january"):
-        challenge_text = "This Works for January"
-    elif (month == "february"):
-        challenge_text = "Learn django"
-    else:
-        return HttpResponseNotFound("Month is not currently supported!!!")
-    return HttpResponse(challenge_text)
+    try:
+        challenge_text = monthly_challenges[month]
+        return HttpResponse(challenge_text)
+    except:
+        return HttpResponseNotFound("This month is not supported jet!!!")
+    
